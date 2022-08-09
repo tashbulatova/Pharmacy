@@ -1,0 +1,33 @@
+use Pharmacy;
+
+create table Product(
+id_Product INT IDENTITY NOT NULL,
+Name NVARCHAR(100),
+PRIMARY KEY (id_Product)
+);
+
+create table Pharmacy(
+id_Pharmacy INT IDENTITY NOT NULL,
+Name NVARCHAR(100),
+Adress NVARCHAR(100),
+Phone NVARCHAR(20),
+PRIMARY KEY (id_Pharmacy)
+);
+
+create table Warehouse(
+id_Warehouse INT IDENTITY NOT NULL,
+Name NVARCHAR(100),
+id_Pharmacy INT,
+FOREIGN KEY (id_Pharmacy) REFERENCES Pharmacy (id_Pharmacy) ON DELETE CASCADE,
+PRIMARY KEY (id_Warehouse)
+);
+
+create table Party(
+id_Party INT IDENTITY NOT NULL,
+id_Product INT,
+id_Warehouse INT,
+Quantity INT,
+FOREIGN KEY (id_Product) REFERENCES Product (id_Product) ON DELETE CASCADE,
+FOREIGN KEY (id_Warehouse) REFERENCES Warehouse (id_Warehouse) ON DELETE CASCADE,
+PRIMARY KEY (id_Party)
+);
